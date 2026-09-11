@@ -7,8 +7,8 @@ import {
   ShieldCheck,
   BadgeCheck,
   Star,
-  Phone,
-  Mail,
+  
+  
   MapPin,
   ArrowRight,
   TrendingDown,
@@ -455,17 +455,6 @@ function Index() {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 space-y-3 rounded-xl border border-border bg-card p-5">
-              <p className="flex items-center gap-3 text-sm">
-                <Phone className="h-4 w-4 text-primary" /> (43) 3000-0000
-              </p>
-              <p className="flex items-center gap-3 text-sm">
-                <Mail className="h-4 w-4 text-primary" /> contato@woltzsolar.com.br
-              </p>
-              <p className="flex items-center gap-3 text-sm">
-                <MapPin className="h-4 w-4 text-primary" /> Atendemos toda a região
-              </p>
-            </div>
           </div>
 
           <div className="rounded-2xl border border-primary/30 bg-card p-6 md:p-8 glow-volt">
