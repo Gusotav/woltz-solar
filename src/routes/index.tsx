@@ -33,13 +33,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Economize até 95% na conta de luz com energia solar. Projetos residenciais, comerciais e rurais entregues pela Woltz Solar. Solicite uma proposta gratuita.",
+          "Reduza drasticamente a sua conta de luz com energia solar. Projetos residenciais, comerciais e rurais entregues pela Woltz Solar. Solicite uma proposta gratuita.",
       },
       { property: "og:title", content: "Woltz Solar — Energia solar que reduz sua conta de luz" },
       {
         property: "og:description",
         content:
-          "Economize até 95% na conta de luz com energia solar. Solicite uma proposta gratuita da Woltz Solar.",
+          "Reduza drasticamente a sua conta de luz com energia solar. Solicite uma proposta gratuita da Woltz Solar.",
       },
     ],
   }),
@@ -182,7 +182,7 @@ function Index() {
           <div className="mx-auto mt-14 grid max-w-3xl grid-cols-3 gap-4">
             {[
               { valor: "+350", label: "projetos entregues" },
-              { valor: "95%", label: "de economia máxima" },
+              { valor: "Economia", label: "real na sua conta de luz" },
               { valor: "25 anos", label: "de garantia dos módulos" },
             ].map((s) => (
               <div
