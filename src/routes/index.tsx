@@ -329,10 +329,17 @@ function Index() {
               </figure>
             ))}
           </div>
+          <div className="mt-12 text-center">
+            <a
+              href="#proposta"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
+            >
+              Quero economia real como esses clientes
+              <ArrowRight className="h-5 w-5" />
+            </a>
+          </div>
         </div>
       </section>
-
-      {/* Formulário */}
       <section id="proposta" className="mx-auto max-w-6xl px-4 py-20">
         <div className="grid items-start gap-10 lg:grid-cols-2">
           <div>
