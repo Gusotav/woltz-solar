@@ -1318,6 +1318,12 @@ function LeadDetailDialog({ lead, onClose }: { lead: Lead | null; onClose: () =>
                       <span>{lead.cidade}</span>
                     </div>
                   )}
+                  {lead.conta_luz && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground">Conta de luz:</span>
+                      <span>{lead.conta_luz}</span>
+                    </div>
+                  )}
                   <div className="flex items-center gap-2">
                     <span className="text-muted-foreground">Valor:</span>
                     <span className="font-semibold">
