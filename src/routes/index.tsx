@@ -104,6 +104,59 @@ const projetos = [
   },
 ];
 
+const TRACKING_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
+  "wbraid",
+  "gbraid",
+] as const;
+
+type Tracking = Record<(typeof TRACKING_KEYS)[number], string | null> & {
+  referrer: string | null;
+  landing_page: string | null;
+};
+
+const TRACKING_STORAGE_KEY = "woltz_tracking";
+
+// Captura UTMs/click IDs na primeira visita e persiste na sessão,
+// para não perder a origem se o visitante navegar antes de enviar.
+function getTracking(): Tracking {
+  const empty: Tracking = {
+    utm_source: null,
+    utm_medium: null,
+    utm_campaign: null,
+    utm_term: null,
+    utm_content: null,
+    gclid: null,
+    wbraid: null,
+    gbraid: null,
+    referrer: null,
+    landing_page: null,
+  };
+  if (typeof window === "undefined") return empty;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl: Tracking = { ...empty };
+    for (const key of TRACKING_KEYS) fromUrl[key] = params.get(key);
+    const hasAny = TRACKING_KEYS.some((key) => fromUrl[key]);
+    if (hasAny) {
+      fromUrl.referrer = document.referrer || null;
+      fromUrl.landing_page = window.location.pathname + window.location.search;
+      sessionStorage.setItem(TRACKING_STORAGE_KEY, JSON.stringify(fromUrl));
+      return fromUrl;
+    }
+    const saved = sessionStorage.getItem(TRACKING_STORAGE_KEY);
+    if (saved) return { ...empty, ...(JSON.parse(saved) as Partial<Tracking>) };
+    return { ...empty, referrer: document.referrer || null, landing_page: window.location.pathname };
+  } catch {
+    return empty;
+  }
+}
+
 function Index() {
   const [form, setForm] = useState({
     nome: "",
