@@ -126,8 +126,7 @@ function Index() {
       return;
     }
     setEnviando(true);
-    const params =
-      typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
+    const t = getTracking();
     const { error } = await supabase.from("leads").insert({
       nome: form.nome.trim().slice(0, 120),
       telefone: form.whatsapp.trim().slice(0, 40),
@@ -135,16 +134,16 @@ function Index() {
       cidade: form.cidade.trim().slice(0, 120) || null,
       tipo_esquadria: [TIPO_IMOVEL_VALUES[form.tipo] ?? "outro"],
       conta_luz: form.conta,
-      utm_source: params.get("utm_source"),
-      utm_medium: params.get("utm_medium"),
-      utm_campaign: params.get("utm_campaign"),
-      utm_term: params.get("utm_term"),
-      utm_content: params.get("utm_content"),
-      gclid: params.get("gclid"),
-      wbraid: params.get("wbraid"),
-      gbraid: params.get("gbraid"),
-      referrer: typeof document !== "undefined" ? document.referrer || null : null,
-      landing_page: typeof window !== "undefined" ? window.location.pathname : null,
+      utm_source: t.utm_source,
+      utm_medium: t.utm_medium,
+      utm_campaign: t.utm_campaign,
+      utm_term: t.utm_term,
+      utm_content: t.utm_content,
+      gclid: t.gclid,
+      wbraid: t.wbraid,
+      gbraid: t.gbraid,
+      referrer: t.referrer,
+      landing_page: t.landing_page,
     });
     setEnviando(false);
     if (error) {
