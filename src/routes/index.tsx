@@ -613,7 +613,9 @@ function Index() {
               Porto Alegre e litoral sul do Rio Grande do Sul.
             </p>
           </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-2">
+            <RSMap />
+            <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
             {[
               "Porto Alegre",
               "Eldorado do Sul",
