@@ -19,6 +19,7 @@ import {
   Handshake,
 } from "lucide-react";
 
+import { RSMap } from "@/components/RSMap";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
