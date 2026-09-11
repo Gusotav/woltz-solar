@@ -91,6 +91,60 @@ export type Database = {
           },
         ]
       }
+      lead_tarefas: {
+        Row: {
+          concluida: boolean
+          concluida_em: string | null
+          created_at: string
+          descricao: string | null
+          due_at: string | null
+          id: string
+          lead_id: string
+          responsavel_id: string | null
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          concluida?: boolean
+          concluida_em?: string | null
+          created_at?: string
+          descricao?: string | null
+          due_at?: string | null
+          id?: string
+          lead_id: string
+          responsavel_id?: string | null
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          concluida?: boolean
+          concluida_em?: string | null
+          created_at?: string
+          descricao?: string | null
+          due_at?: string | null
+          id?: string
+          lead_id?: string
+          responsavel_id?: string | null
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_tarefas_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lead_tarefas_responsavel_id_fkey"
+            columns: ["responsavel_id"]
+            isOneToOne: false
+            referencedRelation: "responsaveis"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           cidade: string | null
@@ -109,6 +163,7 @@ export type Database = {
           nome: string
           quality_score: number | null
           referrer: string | null
+          responsavel_id: string | null
           stage: Database["public"]["Enums"]["lead_stage"]
           status: Database["public"]["Enums"]["lead_status"]
           telefone: string
@@ -140,6 +195,7 @@ export type Database = {
           nome: string
           quality_score?: number | null
           referrer?: string | null
+          responsavel_id?: string | null
           stage?: Database["public"]["Enums"]["lead_stage"]
           status?: Database["public"]["Enums"]["lead_status"]
           telefone: string
@@ -171,6 +227,7 @@ export type Database = {
           nome?: string
           quality_score?: number | null
           referrer?: string | null
+          responsavel_id?: string | null
           stage?: Database["public"]["Enums"]["lead_stage"]
           status?: Database["public"]["Enums"]["lead_status"]
           telefone?: string
@@ -182,6 +239,65 @@ export type Database = {
           utm_source?: string | null
           utm_term?: string | null
           wbraid?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_responsavel_id_fkey"
+            columns: ["responsavel_id"]
+            isOneToOne: false
+            referencedRelation: "responsaveis"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      motivos_perda: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          id: string
+          motivo: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          id?: string
+          motivo: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          id?: string
+          motivo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      responsaveis: {
+        Row: {
+          ativo: boolean
+          created_at: string
+          email: string | null
+          id: string
+          nome: string
+          updated_at: string
+        }
+        Insert: {
+          ativo?: boolean
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome: string
+          updated_at?: string
+        }
+        Update: {
+          ativo?: boolean
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -229,7 +345,12 @@ export type Database = {
         | "15k_30k"
         | "30k_50k"
         | "acima_50k"
-      lead_stage: "novos" | "atendimento" | "orcamento" | "vendas"
+      lead_stage:
+        | "novos"
+        | "atendimento"
+        | "primeiro_contato"
+        | "orcamento"
+        | "vendas"
       lead_status: "aberto" | "ganho" | "abandonado"
     }
     CompositeTypes: {
@@ -367,7 +488,13 @@ export const Constants = {
         "30k_50k",
         "acima_50k",
       ],
-      lead_stage: ["novos", "atendimento", "orcamento", "vendas"],
+      lead_stage: [
+        "novos",
+        "atendimento",
+        "primeiro_contato",
+        "orcamento",
+        "vendas",
+      ],
       lead_status: ["aberto", "ganho", "abandonado"],
     },
   },
