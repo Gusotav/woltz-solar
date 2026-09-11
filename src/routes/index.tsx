@@ -446,7 +446,7 @@ function Index() {
               {[
                 "Simulação de economia com base na sua conta de luz",
                 "Visita técnica e estudo do telhado sem custo",
-                "Financiamento em até 120x — a parcela fica menor que a conta",
+                "Financiamento em até 72x — a parcela fica menor que a conta",
                 "Homologação e garantia cuidadas pela Woltz",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
