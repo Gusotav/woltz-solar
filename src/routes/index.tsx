@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Zap,
   Sun,
@@ -45,6 +46,13 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+const TIPO_IMOVEL_VALUES: Record<string, string> = {
+  "Residência": "residencial",
+  "Comércio / Empresa": "comercial",
+  "Indústria": "industrial",
+  "Propriedade rural": "rural",
+};
 
 const faixasConta = [
   "Até R$ 300",
@@ -106,14 +114,41 @@ function Index() {
     conta: "",
   });
   const [enviado, setEnviado] = useState(false);
+  const [enviando, setEnviando] = useState(false);
 
   const set = (campo: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [campo]: e.target.value }));
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.nome.trim() || !form.whatsapp.trim() || !form.conta) {
       toast.error("Preencha nome, WhatsApp e o valor da conta de luz.");
+      return;
+    }
+    setEnviando(true);
+    const params =
+      typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
+    const { error } = await supabase.from("leads").insert({
+      nome: form.nome.trim().slice(0, 120),
+      telefone: form.whatsapp.trim().slice(0, 40),
+      email: form.email.trim().slice(0, 255) || null,
+      cidade: form.cidade.trim().slice(0, 120) || null,
+      tipo_esquadria: [TIPO_IMOVEL_VALUES[form.tipo] ?? "outro"],
+      conta_luz: form.conta,
+      utm_source: params.get("utm_source"),
+      utm_medium: params.get("utm_medium"),
+      utm_campaign: params.get("utm_campaign"),
+      utm_term: params.get("utm_term"),
+      utm_content: params.get("utm_content"),
+      gclid: params.get("gclid"),
+      wbraid: params.get("wbraid"),
+      gbraid: params.get("gbraid"),
+      referrer: typeof document !== "undefined" ? document.referrer || null : null,
+      landing_page: typeof window !== "undefined" ? window.location.pathname : null,
+    });
+    setEnviando(false);
+    if (error) {
+      toast.error("Não foi possível enviar agora. Tente novamente em instantes.");
       return;
     }
     setEnviado(true);
@@ -573,10 +608,11 @@ function Index() {
                 </div>
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-[1.02]"
+                  disabled={enviando}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-70"
                 >
                   <Zap className="h-5 w-5" />
-                  Quero minha proposta gratuita
+                  {enviando ? "Enviando..." : "Quero minha proposta gratuita"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Seus dados estão seguros e não serão compartilhados.
