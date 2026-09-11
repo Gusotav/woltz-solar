@@ -57,21 +57,21 @@ const faixasConta = [
 const depoimentos = [
   {
     nome: "Carlos Menezes",
-    local: "Residência — Londrina/PR",
+    local: "Residência — Porto Alegre/RS",
     texto:
       "Minha conta caiu de R$ 780 para menos de R$ 90. A equipe da Woltz cuidou de tudo, do projeto à homologação na concessionária.",
     iniciais: "CM",
   },
   {
     nome: "Fernanda Ribeiro",
-    local: "Comércio — Maringá/PR",
+    local: "Comércio — Novo Hamburgo/RS",
     texto:
       "Instalação rápida e sem dor de cabeça. Em 4 meses o sistema já estava pago pela economia que gerou no caixa da loja.",
     iniciais: "FR",
   },
   {
     nome: "João Paulo Aguiar",
-    local: "Propriedade rural — Arapongas/PR",
+    local: "Propriedade rural — Barra do Ribeiro/RS",
     texto:
       "Colocamos energia solar na fazenda para bombear água e alimentar o galpão. Melhor investimento que já fizemos no campo.",
     iniciais: "JA",
