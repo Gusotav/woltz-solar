@@ -608,10 +608,11 @@ function Index() {
                 </div>
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-[1.02]"
+                  disabled={enviando}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-70"
                 >
                   <Zap className="h-5 w-5" />
-                  Quero minha proposta gratuita
+                  {enviando ? "Enviando..." : "Quero minha proposta gratuita"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Seus dados estão seguros e não serão compartilhados.
