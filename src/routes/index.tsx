@@ -147,8 +147,8 @@ function Index() {
             Energia solar fotovoltaica
           </span>
           <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-            Reduza sua conta de luz em até{" "}
-            <span className="text-gradient-volt">95%</span>
+            Financie o seu kit solar com taxa de{" "}
+            <span className="text-gradient-volt">0,99%</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
             A Woltz Solar projeta, instala e homologa seu sistema de energia
