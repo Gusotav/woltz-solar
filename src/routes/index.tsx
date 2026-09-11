@@ -643,6 +643,7 @@ function Index() {
                 {cidade}
               </span>
             ))}
+            </div>
           </div>
           <div className="mt-10 text-center">
             <a
