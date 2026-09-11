@@ -14,16 +14,223 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      lead_attachments: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_path: string
+          id: string
+          lead_id: string
+          mime_type: string | null
+          note_id: string | null
+          size_bytes: number | null
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_path: string
+          id?: string
+          lead_id: string
+          mime_type?: string | null
+          note_id?: string | null
+          size_bytes?: number | null
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          id?: string
+          lead_id?: string
+          mime_type?: string | null
+          note_id?: string | null
+          size_bytes?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_attachments_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lead_attachments_note_id_fkey"
+            columns: ["note_id"]
+            isOneToOne: false
+            referencedRelation: "lead_notes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lead_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          lead_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          lead_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          lead_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_notes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          cidade: string | null
+          created_at: string
+          email: string | null
+          estagio_obra: Database["public"]["Enums"]["estagio_obra"] | null
+          fechado_em: string | null
+          gbraid: string | null
+          gclid: string | null
+          id: string
+          investimento: Database["public"]["Enums"]["investimento_faixa"] | null
+          investimento_valor: number | null
+          landing_page: string | null
+          mensagem: string | null
+          motivo_perda: string | null
+          nome: string
+          quality_score: number | null
+          referrer: string | null
+          stage: Database["public"]["Enums"]["lead_stage"]
+          status: Database["public"]["Enums"]["lead_status"]
+          telefone: string
+          tipo_esquadria: string[]
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          wbraid: string | null
+        }
+        Insert: {
+          cidade?: string | null
+          created_at?: string
+          email?: string | null
+          estagio_obra?: Database["public"]["Enums"]["estagio_obra"] | null
+          fechado_em?: string | null
+          gbraid?: string | null
+          gclid?: string | null
+          id?: string
+          investimento?:
+            | Database["public"]["Enums"]["investimento_faixa"]
+            | null
+          investimento_valor?: number | null
+          landing_page?: string | null
+          mensagem?: string | null
+          motivo_perda?: string | null
+          nome: string
+          quality_score?: number | null
+          referrer?: string | null
+          stage?: Database["public"]["Enums"]["lead_stage"]
+          status?: Database["public"]["Enums"]["lead_status"]
+          telefone: string
+          tipo_esquadria?: string[]
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          wbraid?: string | null
+        }
+        Update: {
+          cidade?: string | null
+          created_at?: string
+          email?: string | null
+          estagio_obra?: Database["public"]["Enums"]["estagio_obra"] | null
+          fechado_em?: string | null
+          gbraid?: string | null
+          gclid?: string | null
+          id?: string
+          investimento?:
+            | Database["public"]["Enums"]["investimento_faixa"]
+            | null
+          investimento_valor?: number | null
+          landing_page?: string | null
+          mensagem?: string | null
+          motivo_perda?: string | null
+          nome?: string
+          quality_score?: number | null
+          referrer?: string | null
+          stage?: Database["public"]["Enums"]["lead_stage"]
+          status?: Database["public"]["Enums"]["lead_status"]
+          telefone?: string
+          tipo_esquadria?: string[]
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          wbraid?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_crm_member: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "staff" | "user"
+      estagio_obra: "planejamento" | "execucao" | "finalizacao"
+      investimento_faixa:
+        | "ate_5k"
+        | "5k_15k"
+        | "15k_30k"
+        | "30k_50k"
+        | "acima_50k"
+      lead_stage: "novos" | "atendimento" | "orcamento" | "vendas"
+      lead_status: "aberto" | "ganho" | "abandonado"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +357,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "staff", "user"],
+      estagio_obra: ["planejamento", "execucao", "finalizacao"],
+      investimento_faixa: [
+        "ate_5k",
+        "5k_15k",
+        "15k_30k",
+        "30k_50k",
+        "acima_50k",
+      ],
+      lead_stage: ["novos", "atendimento", "orcamento", "vendas"],
+      lead_status: ["aberto", "ganho", "abandonado"],
+    },
   },
 } as const
