@@ -106,14 +106,41 @@ function Index() {
     conta: "",
   });
   const [enviado, setEnviado] = useState(false);
+  const [enviando, setEnviando] = useState(false);
 
   const set = (campo: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [campo]: e.target.value }));
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.nome.trim() || !form.whatsapp.trim() || !form.conta) {
       toast.error("Preencha nome, WhatsApp e o valor da conta de luz.");
+      return;
+    }
+    setEnviando(true);
+    const params =
+      typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
+    const { error } = await supabase.from("leads").insert({
+      nome: form.nome.trim().slice(0, 120),
+      telefone: form.whatsapp.trim().slice(0, 40),
+      email: form.email.trim().slice(0, 255) || null,
+      cidade: form.cidade.trim().slice(0, 120) || null,
+      tipo_esquadria: [TIPO_IMOVEL_VALUES[form.tipo] ?? "outro"],
+      conta_luz: form.conta,
+      utm_source: params.get("utm_source"),
+      utm_medium: params.get("utm_medium"),
+      utm_campaign: params.get("utm_campaign"),
+      utm_term: params.get("utm_term"),
+      utm_content: params.get("utm_content"),
+      gclid: params.get("gclid"),
+      wbraid: params.get("wbraid"),
+      gbraid: params.get("gbraid"),
+      referrer: typeof document !== "undefined" ? document.referrer || null : null,
+      landing_page: typeof window !== "undefined" ? window.location.pathname : null,
+    });
+    setEnviando(false);
+    if (error) {
+      toast.error("Não foi possível enviar agora. Tente novamente em instantes.");
       return;
     }
     setEnviado(true);
