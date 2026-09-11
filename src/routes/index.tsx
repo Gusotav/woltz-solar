@@ -14,6 +14,9 @@ import {
   TrendingDown,
   Leaf,
   Wrench,
+  Wallet,
+  CalendarDays,
+  Handshake,
 } from "lucide-react";
 
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
