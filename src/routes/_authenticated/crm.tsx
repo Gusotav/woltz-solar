@@ -110,6 +110,7 @@ type Lead = {
   nome: string;
   telefone: string;
   cidade: string | null;
+  conta_luz: string | null;
   email: string | null;
   tipo_esquadria: string[];
   investimento: string | null;
