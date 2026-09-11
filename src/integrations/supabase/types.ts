@@ -148,6 +148,7 @@ export type Database = {
       leads: {
         Row: {
           cidade: string | null
+          conta_luz: string | null
           created_at: string
           email: string | null
           estagio_obra: Database["public"]["Enums"]["estagio_obra"] | null
@@ -178,6 +179,7 @@ export type Database = {
         }
         Insert: {
           cidade?: string | null
+          conta_luz?: string | null
           created_at?: string
           email?: string | null
           estagio_obra?: Database["public"]["Enums"]["estagio_obra"] | null
@@ -210,6 +212,7 @@ export type Database = {
         }
         Update: {
           cidade?: string | null
+          conta_luz?: string | null
           created_at?: string
           email?: string | null
           estagio_obra?: Database["public"]["Enums"]["estagio_obra"] | null
