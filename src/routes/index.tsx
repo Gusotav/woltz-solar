@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import {
   Zap,
   Sun,
@@ -46,13 +45,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const TIPO_IMOVEL_VALUES: Record<string, string> = {
-  "Residência": "residencial",
-  "Comércio / Empresa": "comercial",
-  "Indústria": "industrial",
-  "Propriedade rural": "rural",
-};
 
 const faixasConta = [
   "Até R$ 300",
@@ -104,59 +96,6 @@ const projetos = [
   },
 ];
 
-const TRACKING_KEYS = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_term",
-  "utm_content",
-  "gclid",
-  "wbraid",
-  "gbraid",
-] as const;
-
-type Tracking = Record<(typeof TRACKING_KEYS)[number], string | null> & {
-  referrer: string | null;
-  landing_page: string | null;
-};
-
-const TRACKING_STORAGE_KEY = "woltz_tracking";
-
-// Captura UTMs/click IDs na primeira visita e persiste na sessão,
-// para não perder a origem se o visitante navegar antes de enviar.
-function getTracking(): Tracking {
-  const empty: Tracking = {
-    utm_source: null,
-    utm_medium: null,
-    utm_campaign: null,
-    utm_term: null,
-    utm_content: null,
-    gclid: null,
-    wbraid: null,
-    gbraid: null,
-    referrer: null,
-    landing_page: null,
-  };
-  if (typeof window === "undefined") return empty;
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const fromUrl: Tracking = { ...empty };
-    for (const key of TRACKING_KEYS) fromUrl[key] = params.get(key);
-    const hasAny = TRACKING_KEYS.some((key) => fromUrl[key]);
-    if (hasAny) {
-      fromUrl.referrer = document.referrer || null;
-      fromUrl.landing_page = window.location.pathname + window.location.search;
-      sessionStorage.setItem(TRACKING_STORAGE_KEY, JSON.stringify(fromUrl));
-      return fromUrl;
-    }
-    const saved = sessionStorage.getItem(TRACKING_STORAGE_KEY);
-    if (saved) return { ...empty, ...(JSON.parse(saved) as Partial<Tracking>) };
-    return { ...empty, referrer: document.referrer || null, landing_page: window.location.pathname };
-  } catch {
-    return empty;
-  }
-}
-
 function Index() {
   const [form, setForm] = useState({
     nome: "",
@@ -179,30 +118,8 @@ function Index() {
       return;
     }
     setEnviando(true);
-    const t = getTracking();
-    const { error } = await supabase.from("leads").insert({
-      nome: form.nome.trim().slice(0, 120),
-      telefone: form.whatsapp.trim().slice(0, 40),
-      email: form.email.trim().slice(0, 255) || null,
-      cidade: form.cidade.trim().slice(0, 120) || null,
-      tipo_esquadria: [TIPO_IMOVEL_VALUES[form.tipo] ?? "outro"],
-      conta_luz: form.conta,
-      utm_source: t.utm_source,
-      utm_medium: t.utm_medium,
-      utm_campaign: t.utm_campaign,
-      utm_term: t.utm_term,
-      utm_content: t.utm_content,
-      gclid: t.gclid,
-      wbraid: t.wbraid,
-      gbraid: t.gbraid,
-      referrer: t.referrer,
-      landing_page: t.landing_page,
-    });
+    await new Promise((r) => setTimeout(r, 400));
     setEnviando(false);
-    if (error) {
-      toast.error("Não foi possível enviar agora. Tente novamente em instantes.");
-      return;
-    }
     setEnviado(true);
     toast.success("Recebido! Nossa equipe entra em contato em até 1 dia útil.");
   }
