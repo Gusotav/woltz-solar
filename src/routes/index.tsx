@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Zap,
   Sun,
@@ -45,6 +46,13 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+const TIPO_IMOVEL_VALUES: Record<string, string> = {
+  "Residência": "residencial",
+  "Comércio / Empresa": "comercial",
+  "Indústria": "industrial",
+  "Propriedade rural": "rural",
+};
 
 const faixasConta = [
   "Até R$ 300",
