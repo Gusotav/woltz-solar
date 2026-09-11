@@ -22,9 +22,9 @@ import {
 export const Route = createFileRoute("/_authenticated/tarefas")({
   head: () => ({
     meta: [
-      { title: "Tarefas — Woltz CRM" },
+      { title: "Tarefas — Woltz Solar CRM" },
       { name: "description", content: "Agenda de tarefas comerciais por lead e responsável." },
-      { property: "og:title", content: "Tarefas — Woltz CRM" },
+      { property: "og:title", content: "Tarefas — Woltz Solar CRM" },
       { property: "og:description", content: "Agenda de tarefas comerciais do funil." },
       { name: "robots", content: "noindex" },
     ],

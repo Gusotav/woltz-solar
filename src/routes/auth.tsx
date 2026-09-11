@@ -74,7 +74,7 @@ function AuthPage() {
         <div className="surface-card p-7">
           <div className="mb-6 flex items-center gap-2">
             <Building2 className="h-5 w-5 text-accent" />
-            <span className="font-display text-base font-bold">Woltz CRM</span>
+            <span className="font-display text-base font-bold">Woltz Solar CRM</span>
           </div>
 
           <Tabs

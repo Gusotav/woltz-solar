@@ -95,9 +95,9 @@ import {
 export const Route = createFileRoute("/_authenticated/crm")({
   head: () => ({
     meta: [
-      { title: "Funil de vendas — Woltz CRM" },
+      { title: "Funil de vendas — Woltz Solar CRM" },
       { name: "description", content: "Gestão de oportunidades e leads da Rhopi Marcenaria." },
-      { property: "og:title", content: "Funil de vendas — Woltz CRM" },
+      { property: "og:title", content: "Funil de vendas — Woltz Solar CRM" },
       { property: "og:description", content: "Gestão de oportunidades e leads." },
       { name: "robots", content: "noindex" },
     ],

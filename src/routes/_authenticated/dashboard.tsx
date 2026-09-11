@@ -22,9 +22,9 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard comercial — Woltz CRM" },
+      { title: "Dashboard comercial — Woltz Solar CRM" },
       { name: "description", content: "Métricas de leads, conversão e canais da Rhopi Marcenaria." },
-      { property: "og:title", content: "Dashboard comercial — Woltz CRM" },
+      { property: "og:title", content: "Dashboard comercial — Woltz Solar CRM" },
       { property: "og:description", content: "Métricas de leads, conversão e canais." },
       { name: "robots", content: "noindex" },
     ],

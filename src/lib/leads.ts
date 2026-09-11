@@ -10,28 +10,14 @@ export function maskPhone(value: string): string {
 }
 
 export const ESQUADRIA_LABELS: Record<string, string> = {
-  porta_aluminio: "Porta em Alumínio",
-  janela_aluminio: "Janela em Alumínio",
-  box_banheiro: "Box para Banheiro",
-  guarda_corpo: "Guarda-corpo",
-  fachada_vidro: "Fachada de Vidro",
-  vidro_temperado: "Vidro temperado",
-  aluminio: "Alumínio",
-  pvc: "PVC",
-  madeira: "Madeira",
-  misto: "Misto",
+  residencial: "Residência",
+  comercial: "Comércio / Empresa",
+  industrial: "Indústria",
+  rural: "Propriedade rural",
   outro: "Outro",
 };
 
-export const TIPO_OPTIONS = [
-  "porta_aluminio",
-  "janela_aluminio",
-  "box_banheiro",
-  "guarda_corpo",
-  "fachada_vidro",
-  "vidro_temperado",
-  "outro",
-];
+export const TIPO_OPTIONS = ["residencial", "comercial", "industrial", "rural", "outro"];
 
 export function formatTipos(tipos: string[] | string | null | undefined): string {
   if (!tipos) return "—";
