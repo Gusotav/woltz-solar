@@ -237,6 +237,90 @@ function Index() {
         </div>
       </section>
 
+      {/* Financiamento */}
+      <section id="financiamento" className="border-y border-border bg-card/30">
+        <div className="mx-auto max-w-5xl px-4 py-16">
+          <div className="overflow-hidden rounded-2xl border border-primary/30 bg-card">
+            {/* Header da taxa */}
+            <div className="relative bg-gradient-to-r from-primary/15 via-primary/10 to-transparent px-6 py-10 text-center md:px-10">
+              <div className="absolute inset-0 grid-texture opacity-30" />
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-volt-soft px-4 py-1.5 text-sm font-bold text-primary">
+                  <Zap className="h-4 w-4" />
+                  Taxa especial
+                </span>
+                <div className="mt-4 flex items-end justify-center gap-2">
+                  <span className="font-display text-6xl font-extrabold text-primary glow-volt md:text-7xl">
+                    0,99%
+                  </span>
+                  <span className="mb-2 text-lg font-medium text-muted-foreground">
+                    ao mês
+                  </span>
+                </div>
+                <h2 className="mt-4 font-display text-2xl font-bold md:text-3xl">
+                  Financie seu sistema de energia solar
+                </h2>
+                <p className="mx-auto mt-3 max-w-lg text-sm text-muted-foreground">
+                  A Woltz Solar fecha com a CAIXA uma condição especial para
+                  você levar economia solar para casa.
+                </p>
+              </div>
+            </div>
+
+            {/* Cards de condições */}
+            <div className="grid gap-0 md:grid-cols-3">
+              <div className="flex flex-col items-center gap-3 px-6 py-8 text-center md:border-r md:border-border">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-volt-soft">
+                  <Wallet className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-display text-base font-bold">
+                  Até R$ 50 mil
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  para instalação do seu sistema de energia solar.
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-3 border-t border-border px-6 py-8 text-center md:border-r">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-volt-soft">
+                  <CalendarDays className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-display text-base font-bold">
+                  Até 72 meses
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  para pagar com parcelas que cabem no seu bolso.
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-3 border-t border-border px-6 py-8 text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-volt-soft">
+                  <Handshake className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-display text-base font-bold">
+                  Condição especial
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  em parceria com a CAIXA para levar mais economia até você.
+                </p>
+              </div>
+            </div>
+
+            {/* Parceria + CTA */}
+            <div className="flex flex-col items-center gap-5 border-t border-border bg-background/40 px-6 py-8 md:flex-row md:justify-between">
+              <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+                Parceria oficial: Woltz Solar + CAIXA
+              </p>
+              <a
+                href="#proposta"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
+              >
+                Faça uma simulação gratuita agora
+                <ArrowRight className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projetos */}
       <section id="projetos" className="mx-auto max-w-6xl px-4 py-20">
         <div className="text-center">
