@@ -7,7 +7,7 @@ import {
   ShieldCheck,
   BadgeCheck,
   Star,
-  Phone,
+  
   Mail,
   MapPin,
   ArrowRight,
