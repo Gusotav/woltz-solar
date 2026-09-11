@@ -510,6 +510,62 @@ function Index() {
         </div>
       </section>
 
+      {/* Áreas de atendimento */}
+      <section id="areas" className="border-y border-border bg-card/30">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <div className="text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-volt-soft px-4 py-1.5 text-sm font-medium text-primary">
+              <MapPin className="h-4 w-4" />
+              Cobertura regional
+            </span>
+            <h2 className="mt-6 font-display text-3xl font-bold md:text-4xl">
+              Áreas de atendimento
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              A Woltz Solar atende clientes em toda a região metropolitana de
+              Porto Alegre e litoral sul do Rio Grande do Sul.
+            </p>
+          </div>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {[
+              "Porto Alegre",
+              "Eldorado do Sul",
+              "Barra do Ribeiro",
+              "Tapes",
+              "Mariana Pimentel",
+              "Arambaré",
+              "Camaquã",
+              "Canoas",
+              "Esteio",
+              "Sapucaia do Sul",
+              "São Leopoldo",
+              "Novo Hamburgo",
+              "Gravataí",
+              "Cachoeirinha",
+              "Alvorada",
+              "Viamão",
+            ].map((cidade) => (
+              <span
+                key={cidade}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background/60 px-4 py-2 text-sm font-medium text-foreground/90"
+              >
+                <MapPin className="h-3.5 w-3.5 text-primary" />
+                {cidade}
+              </span>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <a
+              href="#proposta"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
+            >
+              Quero atender na minha cidade
+              <ArrowRight className="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-border bg-card/40">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-10 text-center">
