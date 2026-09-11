@@ -8,7 +8,7 @@ import {
   BadgeCheck,
   Star,
   
-  Mail,
+  
   MapPin,
   ArrowRight,
   TrendingDown,
