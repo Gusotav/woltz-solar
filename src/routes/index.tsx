@@ -588,10 +588,13 @@ function Index() {
                       id="whatsapp"
                       type="tel"
                       required
-                      maxLength={20}
+                      maxLength={15}
+                      inputMode="tel"
                       value={form.whatsapp}
-                      onChange={set("whatsapp")}
-                      placeholder="(43) 99999-0000"
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, whatsapp: maskPhone(e.target.value) }))
+                      }
+                      placeholder="(51) 99999-9999"
                       className="w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring/30"
                     />
                   </div>
