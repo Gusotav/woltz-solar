@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          cidade: string | null
+          conta_luz: string | null
+          created_at: string
+          email: string | null
+          fbclid: string | null
+          gclid: string | null
+          id: string
+          landing_page: string | null
+          nome: string
+          referrer: string | null
+          telefone: string
+          tipo_imovel: string | null
+          updated_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          cidade?: string | null
+          conta_luz?: string | null
+          created_at?: string
+          email?: string | null
+          fbclid?: string | null
+          gclid?: string | null
+          id?: string
+          landing_page?: string | null
+          nome: string
+          referrer?: string | null
+          telefone: string
+          tipo_imovel?: string | null
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          cidade?: string | null
+          conta_luz?: string | null
+          created_at?: string
+          email?: string | null
+          fbclid?: string | null
+          gclid?: string | null
+          id?: string
+          landing_page?: string | null
+          nome?: string
+          referrer?: string | null
+          telefone?: string
+          tipo_imovel?: string | null
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
