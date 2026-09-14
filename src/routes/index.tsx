@@ -97,6 +97,72 @@ const projetos = [
   },
 ];
 
+const TRACKING_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
+  "fbclid",
+] as const;
+
+type Tracking = Record<(typeof TRACKING_KEYS)[number], string | null> & {
+  referrer: string | null;
+  landing_page: string | null;
+};
+
+const TRACKING_STORAGE_KEY = "woltz_tracking";
+
+function emptyTracking(): Tracking {
+  const base = {} as Tracking;
+  for (const k of TRACKING_KEYS) base[k] = null;
+  base.referrer = null;
+  base.landing_page = null;
+  return base;
+}
+
+function getTracking(): Tracking {
+  if (typeof window === "undefined") return emptyTracking();
+
+  let stored: Partial<Tracking> = {};
+  try {
+    const raw = window.sessionStorage.getItem(TRACKING_STORAGE_KEY);
+    if (raw) stored = JSON.parse(raw) as Partial<Tracking>;
+  } catch {
+    stored = {};
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const tracking = emptyTracking();
+  for (const k of TRACKING_KEYS) {
+    const fromUrl = params.get(k);
+    tracking[k] = (fromUrl || stored[k] || null)?.slice(0, 255) ?? null;
+  }
+  tracking.referrer =
+    (stored.referrer || document.referrer || null)?.slice(0, 500) ?? null;
+  tracking.landing_page =
+    (stored.landing_page ||
+      window.location.pathname + window.location.search ||
+      null)?.slice(0, 500) ?? null;
+
+  try {
+    window.sessionStorage.setItem(TRACKING_STORAGE_KEY, JSON.stringify(tracking));
+  } catch {
+    /* storage indisponível */
+  }
+
+  return tracking;
+}
+
+function maskPhone(value: string) {
+  const d = value.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d.length ? `(${d}` : "";
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
 function Index() {
   const [form, setForm] = useState({
     nome: "",
@@ -118,9 +184,30 @@ function Index() {
       toast.error("Preencha nome, WhatsApp e o valor da conta de luz.");
       return;
     }
+    if (form.whatsapp.replace(/\D/g, "").length < 10) {
+      toast.error("Informe um WhatsApp válido com DDD.");
+      return;
+    }
+
     setEnviando(true);
-    await new Promise((r) => setTimeout(r, 400));
+    const tracking = getTracking();
+    const { error } = await supabase.from("leads").insert({
+      nome: form.nome.trim().slice(0, 120),
+      telefone: form.whatsapp.trim().slice(0, 20),
+      email: form.email.trim().slice(0, 255) || null,
+      cidade: form.cidade.trim().slice(0, 120) || null,
+      tipo_imovel: form.tipo,
+      conta_luz: form.conta,
+      ...tracking,
+    });
     setEnviando(false);
+
+    if (error) {
+      console.error("Erro ao salvar lead", error);
+      toast.error("Não conseguimos enviar agora. Tente novamente em instantes.");
+      return;
+    }
+
     setEnviado(true);
     toast.success("Recebido! Nossa equipe entra em contato em até 1 dia útil.");
   }
