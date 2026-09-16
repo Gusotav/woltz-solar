@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 
 import { RSMap } from "@/components/RSMap";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/leads.functions";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
