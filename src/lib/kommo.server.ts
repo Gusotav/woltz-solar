@@ -56,9 +56,7 @@ async function kommoFetch(path: string, init?: RequestInit) {
 type KommoCustomField = { id: number; name: string; type?: string };
 
 async function loadStoredMap(): Promise<Record<string, number>> {
-  const { data, error } = await supabaseAdmin
-    .from("kommo_field_map")
-    .select("field_key, field_id");
+  const { data, error } = await supabaseAdmin.from("kommo_field_map").select("field_key, field_id");
   if (error) {
     console.error("[Kommo] erro lendo kommo_field_map", error);
     return {};
@@ -80,9 +78,9 @@ export async function ensureFields(): Promise<Record<string, number>> {
     // Campos já existentes na conta (paginado)
     const existing = new Map<string, number>();
     for (let page = 1; page <= 10; page++) {
-      const res = (await kommoFetch(`/leads/custom_fields?page=${page}&limit=250`)) as
-        | { _embedded?: { custom_fields?: KommoCustomField[] } }
-        | null;
+      const res = (await kommoFetch(`/leads/custom_fields?page=${page}&limit=250`)) as {
+        _embedded?: { custom_fields?: KommoCustomField[] };
+      } | null;
       const fields = res?._embedded?.custom_fields ?? [];
       for (const f of fields) existing.set(f.name.trim().toLowerCase(), f.id);
       if (fields.length < 250) break;
@@ -111,9 +109,7 @@ export async function ensureFields(): Promise<Record<string, number>> {
 
     const rows = Object.entries(map).map(([field_key, field_id]) => ({ field_key, field_id }));
     if (rows.length > 0) {
-      const { error } = await supabaseAdmin
-        .from("kommo_field_map")
-        .upsert(rows, { onConflict: "field_key" });
+      const { error } = await supabaseAdmin.from("kommo_field_map").upsert(rows, { onConflict: "field_key" });
       if (error) console.error("[Kommo] erro salvando kommo_field_map", error);
     }
   }
@@ -141,7 +137,7 @@ export async function createKommoLead(payload: KommoLeadPayload): Promise<number
     method: "POST",
     body: JSON.stringify([
       {
-        name: `Site — ${payload.nome}`,
+        name: `${payload.nome}`,
         pipeline_id: KOMMO_PIPELINE_ID,
         status_id: KOMMO_STATUS_ID,
         custom_fields_values,
