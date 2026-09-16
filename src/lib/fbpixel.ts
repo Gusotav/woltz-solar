@@ -32,8 +32,9 @@ export async function initPixel(): Promise<void> {
   try {
     if (typeof window === "undefined") return;
     if (window._fbPixelInitialized) return;
-    if (!FB_PIXEL_ID || FB_PIXEL_ID.startsWith("__")) return;
     if (!(await isTrackingAllowed())) return;
+    const pixelId = await getPixelId();
+    if (!pixelId) return;
     if (window._fbPixelInitialized) return;
     window._fbPixelInitialized = true;
 
