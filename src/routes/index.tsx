@@ -175,6 +175,7 @@ function Index() {
   });
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
+  const enviarLead = useServerFn(submitLead);
 
   const set = (campo: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [campo]: e.target.value }));
