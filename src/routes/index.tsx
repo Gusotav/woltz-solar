@@ -22,6 +22,7 @@ import {
 import { RSMap } from "@/components/RSMap";
 import { useServerFn } from "@tanstack/react-start";
 import { submitLead } from "@/lib/leads.functions";
+import { trackLeadConversion } from "@/lib/googleAds";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
@@ -222,8 +223,9 @@ function Index() {
 
     setEnviando(true);
     const tracking = getTracking();
+    let resultado: Awaited<ReturnType<typeof enviarLead>>;
     try {
-      await enviarLead({
+      resultado = await enviarLead({
         data: {
           nome: form.nome.trim().slice(0, 120),
           telefone: form.whatsapp.trim().slice(0, 20),
@@ -241,6 +243,19 @@ function Index() {
     } finally {
       setEnviando(false);
     }
+
+    if (!resultado?.kommoLeadId) {
+      toast.error("Não conseguimos enviar agora. Tente novamente em instantes.");
+      return;
+    }
+
+    // Conversão do Google Ads: nunca bloqueia a interface.
+    void trackLeadConversion({
+      email: form.email.trim() || null,
+      phone: form.whatsapp,
+      name: form.nome,
+      transactionId: resultado.id,
+    });
 
     setEnviado(true);
     toast.success("Recebido! Nossa equipe entra em contato em até 1 dia útil.");
