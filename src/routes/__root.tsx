@@ -6,6 +6,7 @@ import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { loadGoogleAds } from "../lib/googleAds";
+import { MetaPixelProvider } from "@/components/MetaPixelProvider";
 
 function NotFoundComponent() {
   return (
