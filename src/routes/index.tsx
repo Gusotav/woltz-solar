@@ -23,6 +23,7 @@ import { RSMap } from "@/components/RSMap";
 import { useServerFn } from "@tanstack/react-start";
 import { submitLead } from "@/lib/leads.functions";
 import { trackLeadConversion } from "@/lib/googleAds";
+import { trackWebEvent } from "@/lib/fbpixel";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
@@ -194,6 +195,19 @@ function maskPhone(value: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
+/**
+ * Âncoras internas: rolagem suave sem alterar a URL (evita PageView falso).
+ */
+function anchorProps(id: string) {
+  return {
+    href: `#${id}`,
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    },
+  };
+}
+
 function Index() {
   const [form, setForm] = useState({
     nome: "",
@@ -257,6 +271,21 @@ function Index() {
       transactionId: resultado.id,
     });
 
+    // Meta: evento Lead pelo navegador + CAPI, com o mesmo eventID.
+    const partes = form.nome.trim().split(/\s+/).filter(Boolean);
+    void trackWebEvent(
+      "Lead",
+      { content_name: "form_contato", content_category: "lead_form" },
+      {
+        email: form.email.trim() || null,
+        phone: form.whatsapp,
+        first_name: partes[0] ?? null,
+        last_name: partes.slice(1).join(" ") || null,
+        city: form.cidade.trim() || null,
+      },
+      resultado.id,
+    );
+
     setEnviado(true);
     toast.success("Recebido! Nossa equipe entra em contato em até 1 dia útil.");
   }
@@ -268,7 +297,7 @@ function Index() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <img src={logoAsset.url} alt="Woltz Solar" className="h-9 w-auto" />
           <a
-            href="#proposta"
+            {...anchorProps("proposta")}
             className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 glow-volt"
           >
             Quero economizar
@@ -301,14 +330,14 @@ function Index() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="#proposta"
+              {...anchorProps("proposta")}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
             >
               Receber proposta gratuita
               <ArrowRight className="h-5 w-5" />
             </a>
             <a
-              href="#projetos"
+              {...anchorProps("projetos")}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-accent"
             >
               Ver projetos entregues
@@ -370,7 +399,7 @@ function Index() {
         </div>
         <div className="mt-12 text-center">
           <a
-            href="#proposta"
+            {...anchorProps("proposta")}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
           >
             Quero começar a economizar
@@ -452,7 +481,7 @@ function Index() {
                 Parceria oficial: Woltz Solar + CAIXA
               </p>
               <a
-                href="#proposta"
+                {...anchorProps("proposta")}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
               >
                 Faça uma simulação gratuita agora
@@ -502,7 +531,7 @@ function Index() {
         </div>
         <div className="mt-12 text-center">
           <a
-            href="#proposta"
+            {...anchorProps("proposta")}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
           >
             Quero um projeto como este
@@ -560,7 +589,7 @@ function Index() {
           </div>
           <div className="mt-12 text-center">
             <a
-              href="#proposta"
+              {...anchorProps("proposta")}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
             >
               Quero economia real como esses clientes
@@ -785,7 +814,7 @@ function Index() {
           </div>
           <div className="mt-10 text-center">
             <a
-              href="#proposta"
+              {...anchorProps("proposta")}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
             >
               Quero atender na minha cidade

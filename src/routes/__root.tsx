@@ -1,11 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts, ClientOnly } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { loadGoogleAds } from "../lib/googleAds";
+import { MetaPixelProvider } from "@/components/MetaPixelProvider";
 
 function NotFoundComponent() {
   return (
@@ -126,6 +127,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <ClientOnly fallback={null}>
+        <MetaPixelProvider />
+      </ClientOnly>
       <Toaster richColors position="top-center" />
     </QueryClientProvider>
   );
