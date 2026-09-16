@@ -54,9 +54,9 @@ export async function initPixel(): Promise<void> {
     }
     /* eslint-enable prefer-rest-params */
 
-    window.fbq("init", FB_PIXEL_ID);
+    window.fbq("init", pixelId);
     // Desliga o auto-track de pushState/hash em SPA.
-    window.fbq("set", "autoConfig", false, FB_PIXEL_ID);
+    window.fbq("set", "autoConfig", false, pixelId);
   } catch (err) {
     console.warn("[fbpixel] falha ao inicializar", err);
   }
