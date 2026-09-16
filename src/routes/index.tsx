@@ -270,6 +270,21 @@ function Index() {
       transactionId: resultado.id,
     });
 
+    // Meta: evento Lead pelo navegador + CAPI, com o mesmo eventID.
+    const partes = form.nome.trim().split(/\s+/).filter(Boolean);
+    void trackWebEvent(
+      "Lead",
+      { content_name: "form_contato", content_category: "lead_form" },
+      {
+        email: form.email.trim() || null,
+        phone: form.whatsapp,
+        first_name: partes[0] ?? null,
+        last_name: partes.slice(1).join(" ") || null,
+        city: form.cidade.trim() || null,
+      },
+      resultado.id,
+    );
+
     setEnviado(true);
     toast.success("Recebido! Nossa equipe entra em contato em até 1 dia útil.");
   }
