@@ -193,21 +193,24 @@ function Index() {
 
     setEnviando(true);
     const tracking = getTracking();
-    const { error } = await supabase.from("leads").insert({
-      nome: form.nome.trim().slice(0, 120),
-      telefone: form.whatsapp.trim().slice(0, 20),
-      email: form.email.trim().slice(0, 255) || null,
-      cidade: form.cidade.trim().slice(0, 120) || null,
-      tipo_imovel: form.tipo,
-      conta_luz: form.conta,
-      ...tracking,
-    });
-    setEnviando(false);
-
-    if (error) {
+    try {
+      await enviarLead({
+        data: {
+          nome: form.nome.trim().slice(0, 120),
+          telefone: form.whatsapp.trim().slice(0, 20),
+          email: form.email.trim().slice(0, 255) || null,
+          cidade: form.cidade.trim().slice(0, 120) || null,
+          tipo_imovel: form.tipo,
+          conta_luz: form.conta,
+          ...tracking,
+        },
+      });
+    } catch (error) {
       console.error("Erro ao salvar lead", error);
       toast.error("Não conseguimos enviar agora. Tente novamente em instantes.");
       return;
+    } finally {
+      setEnviando(false);
     }
 
     setEnviado(true);
