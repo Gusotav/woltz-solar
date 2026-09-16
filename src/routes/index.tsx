@@ -194,6 +194,19 @@ function maskPhone(value: string) {
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
 }
 
+/**
+ * Âncoras internas: rolagem suave sem alterar a URL (evita PageView falso).
+ */
+function anchorProps(id: string) {
+  return {
+    href: `#${id}`,
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    },
+  };
+}
+
 function Index() {
   const [form, setForm] = useState({
     nome: "",
