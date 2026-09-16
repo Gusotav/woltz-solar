@@ -4,10 +4,20 @@
 
 import { isTrackingAllowed } from "./googleAds";
 
-/** ID público do Pixel (não é segredo; o token da CAPI fica só no servidor). */
-export const FB_PIXEL_ID = "__FB_PIXEL_ID__";
-
 const CAPI_ENDPOINT = "/api/public/meta-event";
+
+/** O ID do Pixel é público, mas vem do servidor para não duplicar configuração. */
+let pixelIdPromise: Promise<string | null> | null = null;
+
+async function getPixelId(): Promise<string | null> {
+  if (!pixelIdPromise) {
+    pixelIdPromise = fetch(CAPI_ENDPOINT)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j: { pixel_id?: string | null } | null) => j?.pixel_id ?? null)
+      .catch(() => null);
+  }
+  return pixelIdPromise;
+}
 
 declare global {
   interface Window {
