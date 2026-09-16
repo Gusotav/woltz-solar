@@ -20,7 +20,8 @@ import {
 } from "lucide-react";
 
 import { RSMap } from "@/components/RSMap";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { submitLead } from "@/lib/leads.functions";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
@@ -174,6 +175,7 @@ function Index() {
   });
   const [enviado, setEnviado] = useState(false);
   const [enviando, setEnviando] = useState(false);
+  const enviarLead = useServerFn(submitLead);
 
   const set = (campo: keyof typeof form) => (e: { target: { value: string } }) =>
     setForm((f) => ({ ...f, [campo]: e.target.value }));
@@ -191,21 +193,24 @@ function Index() {
 
     setEnviando(true);
     const tracking = getTracking();
-    const { error } = await supabase.from("leads").insert({
-      nome: form.nome.trim().slice(0, 120),
-      telefone: form.whatsapp.trim().slice(0, 20),
-      email: form.email.trim().slice(0, 255) || null,
-      cidade: form.cidade.trim().slice(0, 120) || null,
-      tipo_imovel: form.tipo,
-      conta_luz: form.conta,
-      ...tracking,
-    });
-    setEnviando(false);
-
-    if (error) {
+    try {
+      await enviarLead({
+        data: {
+          nome: form.nome.trim().slice(0, 120),
+          telefone: form.whatsapp.trim().slice(0, 20),
+          email: form.email.trim().slice(0, 255) || null,
+          cidade: form.cidade.trim().slice(0, 120) || null,
+          tipo_imovel: form.tipo,
+          conta_luz: form.conta,
+          ...tracking,
+        },
+      });
+    } catch (error) {
       console.error("Erro ao salvar lead", error);
       toast.error("Não conseguimos enviar agora. Tente novamente em instantes.");
       return;
+    } finally {
+      setEnviando(false);
     }
 
     setEnviado(true);
