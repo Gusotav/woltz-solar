@@ -803,6 +803,12 @@ function Index() {
             Energia solar fotovoltaica para residências, empresas e agronegócio.
             Economia real, projeto completo, instalação garantida.
           </p>
+          <Link
+            to="/privacidade"
+            className="text-xs font-medium text-muted-foreground underline hover:text-primary"
+          >
+            Política de privacidade
+          </Link>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Woltz Solar. Todos os direitos reservados.
           </p>
