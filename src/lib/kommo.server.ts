@@ -20,6 +20,9 @@ export const KOMMO_FIELDS: Record<string, string> = {
   utm_content: "utm_content",
   gclid: "gclid",
   fbclid: "fbclid",
+  gad_source: "gad_source",
+  gbraid: "gbraid",
+  wbraid: "wbraid",
   referrer: "referrer",
   landing_page: "landing_page",
 };

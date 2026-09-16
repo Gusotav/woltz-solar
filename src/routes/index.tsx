@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import {
@@ -22,6 +22,7 @@ import {
 import { RSMap } from "@/components/RSMap";
 import { useServerFn } from "@tanstack/react-start";
 import { submitLead } from "@/lib/leads.functions";
+import { trackLeadConversion } from "@/lib/googleAds";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
@@ -106,6 +107,9 @@ const TRACKING_KEYS = [
   "utm_content",
   "gclid",
   "fbclid",
+  "gad_source",
+  "gbraid",
+  "wbraid",
 ] as const;
 
 type Tracking = Record<(typeof TRACKING_KEYS)[number], string | null> & {
@@ -146,6 +150,32 @@ function getTracking(): Tracking {
     (stored.landing_page ||
       window.location.pathname + window.location.search ||
       null)?.slice(0, 500) ?? null;
+
+  // Regras de atribuição de origem
+  if (!tracking.utm_source) {
+    if (tracking.gclid || tracking.gad_source || tracking.gbraid || tracking.wbraid) {
+      tracking.utm_source = "google";
+      tracking.utm_medium = tracking.utm_medium || "cpc";
+    } else {
+      let referrerHost: string | null = null;
+      try {
+        if (tracking.referrer) {
+          const host = new URL(tracking.referrer).hostname;
+          if (host && host !== window.location.hostname) referrerHost = host;
+        }
+      } catch {
+        referrerHost = null;
+      }
+
+      if (referrerHost) {
+        tracking.utm_source = referrerHost.slice(0, 255);
+        tracking.utm_medium = tracking.utm_medium || "referral";
+      } else {
+        tracking.utm_source = "direct";
+        tracking.utm_medium = tracking.utm_medium || "none";
+      }
+    }
+  }
 
   try {
     window.sessionStorage.setItem(TRACKING_STORAGE_KEY, JSON.stringify(tracking));
@@ -193,8 +223,9 @@ function Index() {
 
     setEnviando(true);
     const tracking = getTracking();
+    let resultado: Awaited<ReturnType<typeof enviarLead>>;
     try {
-      await enviarLead({
+      resultado = await enviarLead({
         data: {
           nome: form.nome.trim().slice(0, 120),
           telefone: form.whatsapp.trim().slice(0, 20),
@@ -212,6 +243,19 @@ function Index() {
     } finally {
       setEnviando(false);
     }
+
+    if (!resultado?.kommoLeadId) {
+      toast.error("Não conseguimos enviar agora. Tente novamente em instantes.");
+      return;
+    }
+
+    // Conversão do Google Ads: nunca bloqueia a interface.
+    void trackLeadConversion({
+      email: form.email.trim() || null,
+      phone: form.whatsapp,
+      name: form.nome,
+      transactionId: resultado.id,
+    });
 
     setEnviado(true);
     toast.success("Recebido! Nossa equipe entra em contato em até 1 dia útil.");
@@ -680,7 +724,11 @@ function Index() {
                   {enviando ? "Enviando..." : "Quero minha proposta gratuita"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
-                  Seus dados estão seguros e não serão compartilhados.
+                  Ao enviar, você concorda com a nossa{" "}
+                  <Link to="/privacidade" className="underline hover:text-primary">
+                    política de privacidade
+                  </Link>
+                  .
                 </p>
               </form>
             )}
@@ -755,6 +803,12 @@ function Index() {
             Energia solar fotovoltaica para residências, empresas e agronegócio.
             Economia real, projeto completo, instalação garantida.
           </p>
+          <Link
+            to="/privacidade"
+            className="text-xs font-medium text-muted-foreground underline hover:text-primary"
+          >
+            Política de privacidade
+          </Link>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Woltz Solar. Todos os direitos reservados.
           </p>

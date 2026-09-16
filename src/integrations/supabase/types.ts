@@ -42,6 +42,8 @@ export type Database = {
           created_at: string
           email: string | null
           fbclid: string | null
+          gad_source: string | null
+          gbraid: string | null
           gclid: string | null
           id: string
           kommo_error: string | null
@@ -59,6 +61,7 @@ export type Database = {
           utm_medium: string | null
           utm_source: string | null
           utm_term: string | null
+          wbraid: string | null
         }
         Insert: {
           cidade?: string | null
@@ -66,6 +69,8 @@ export type Database = {
           created_at?: string
           email?: string | null
           fbclid?: string | null
+          gad_source?: string | null
+          gbraid?: string | null
           gclid?: string | null
           id?: string
           kommo_error?: string | null
@@ -83,6 +88,7 @@ export type Database = {
           utm_medium?: string | null
           utm_source?: string | null
           utm_term?: string | null
+          wbraid?: string | null
         }
         Update: {
           cidade?: string | null
@@ -90,6 +96,8 @@ export type Database = {
           created_at?: string
           email?: string | null
           fbclid?: string | null
+          gad_source?: string | null
+          gbraid?: string | null
           gclid?: string | null
           id?: string
           kommo_error?: string | null
@@ -107,6 +115,7 @@ export type Database = {
           utm_medium?: string | null
           utm_source?: string | null
           utm_term?: string | null
+          wbraid?: string | null
         }
         Relationships: []
       }
