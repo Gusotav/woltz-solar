@@ -150,6 +150,32 @@ function getTracking(): Tracking {
       window.location.pathname + window.location.search ||
       null)?.slice(0, 500) ?? null;
 
+  // Regras de atribuição de origem
+  if (!tracking.utm_source) {
+    if (tracking.gclid || tracking.gad_source || tracking.gbraid || tracking.wbraid) {
+      tracking.utm_source = "google";
+      tracking.utm_medium = tracking.utm_medium || "cpc";
+    } else {
+      let referrerHost: string | null = null;
+      try {
+        if (tracking.referrer) {
+          const host = new URL(tracking.referrer).hostname;
+          if (host && host !== window.location.hostname) referrerHost = host;
+        }
+      } catch {
+        referrerHost = null;
+      }
+
+      if (referrerHost) {
+        tracking.utm_source = referrerHost.slice(0, 255);
+        tracking.utm_medium = tracking.utm_medium || "referral";
+      } else {
+        tracking.utm_source = "direct";
+        tracking.utm_medium = tracking.utm_medium || "none";
+      }
+    }
+  }
+
   try {
     window.sessionStorage.setItem(TRACKING_STORAGE_KEY, JSON.stringify(tracking));
   } catch {
