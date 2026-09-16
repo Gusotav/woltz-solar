@@ -23,6 +23,7 @@ import { RSMap } from "@/components/RSMap";
 import { useServerFn } from "@tanstack/react-start";
 import { submitLead } from "@/lib/leads.functions";
 import { trackLeadConversion } from "@/lib/googleAds";
+import { trackWebEvent } from "@/lib/fbpixel";
 import logoAsset from "@/assets/woltz-logo.png.asset.json";
 import heroSolar from "@/assets/hero-solar.jpg";
 import projeto1 from "@/assets/projeto-1.jpg";
