@@ -42,6 +42,9 @@ function normalizePhone(phone?: string | null): string | undefined {
 export const Route = createFileRoute("/api/public/meta-event")({
   server: {
     handlers: {
+      // O ID do Pixel é público; o token nunca sai do servidor.
+      GET: async () =>
+        Response.json({ pixel_id: process.env["FB_PIXEL_ID"] ?? null }),
       POST: async ({ request }) => {
         const pixelId = process.env["FB_PIXEL_ID"];
         const token = process.env["FB_ACCESS_TOKEN"];
