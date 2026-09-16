@@ -106,6 +106,9 @@ const TRACKING_KEYS = [
   "utm_content",
   "gclid",
   "fbclid",
+  "gad_source",
+  "gbraid",
+  "wbraid",
 ] as const;
 
 type Tracking = Record<(typeof TRACKING_KEYS)[number], string | null> & {
