@@ -97,7 +97,7 @@ export function splitName(fullName?: string | null): {
   if (parts.length === 0) return {};
   const [first, ...rest] = parts;
   return {
-    first_name: first,
+    ...(first ? { first_name: first } : {}),
     ...(rest.length ? { last_name: rest.join(" ") } : {}),
   };
 }
