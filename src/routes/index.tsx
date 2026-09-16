@@ -724,7 +724,11 @@ function Index() {
                   {enviando ? "Enviando..." : "Quero minha proposta gratuita"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
-                  Seus dados estão seguros e não serão compartilhados.
+                  Ao enviar, você concorda com a nossa{" "}
+                  <Link to="/privacidade" className="underline hover:text-primary">
+                    política de privacidade
+                  </Link>
+                  .
                 </p>
               </form>
             )}

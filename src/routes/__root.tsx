@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { loadGoogleAds } from "../lib/googleAds";
 
 function NotFoundComponent() {
   return (
@@ -118,6 +119,12 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  // Google Ads (gtag.js + Conversion Linker): só depois da hidratação e
+  // somente onde o rastreamento é permitido (ver src/lib/googleAds.ts).
+  useEffect(() => {
+    void loadGoogleAds();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
