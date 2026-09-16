@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      kommo_field_map: {
+        Row: {
+          created_at: string
+          field_id: number
+          field_key: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          field_id: number
+          field_key: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          field_id?: number
+          field_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           cidade: string | null
@@ -23,6 +44,10 @@ export type Database = {
           fbclid: string | null
           gclid: string | null
           id: string
+          kommo_error: string | null
+          kommo_lead_id: number | null
+          kommo_sent_at: string | null
+          kommo_status: string
           landing_page: string | null
           nome: string
           referrer: string | null
@@ -43,6 +68,10 @@ export type Database = {
           fbclid?: string | null
           gclid?: string | null
           id?: string
+          kommo_error?: string | null
+          kommo_lead_id?: number | null
+          kommo_sent_at?: string | null
+          kommo_status?: string
           landing_page?: string | null
           nome: string
           referrer?: string | null
@@ -63,6 +92,10 @@ export type Database = {
           fbclid?: string | null
           gclid?: string | null
           id?: string
+          kommo_error?: string | null
+          kommo_lead_id?: number | null
+          kommo_sent_at?: string | null
+          kommo_status?: string
           landing_page?: string | null
           nome?: string
           referrer?: string | null
