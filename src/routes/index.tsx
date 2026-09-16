@@ -268,7 +268,7 @@ function Index() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <img src={logoAsset.url} alt="Woltz Solar" className="h-9 w-auto" />
           <a
-            href="#proposta"
+            {...anchorProps("proposta")}
             className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 glow-volt"
           >
             Quero economizar
@@ -301,14 +301,14 @@ function Index() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="#proposta"
+              {...anchorProps("proposta")}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
             >
               Receber proposta gratuita
               <ArrowRight className="h-5 w-5" />
             </a>
             <a
-              href="#projetos"
+              {...anchorProps("projetos")}
               className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-7 py-3.5 text-base font-semibold text-secondary-foreground hover:bg-accent"
             >
               Ver projetos entregues
@@ -370,7 +370,7 @@ function Index() {
         </div>
         <div className="mt-12 text-center">
           <a
-            href="#proposta"
+            {...anchorProps("proposta")}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
           >
             Quero começar a economizar
@@ -452,7 +452,7 @@ function Index() {
                 Parceria oficial: Woltz Solar + CAIXA
               </p>
               <a
-                href="#proposta"
+                {...anchorProps("proposta")}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
               >
                 Faça uma simulação gratuita agora
@@ -502,7 +502,7 @@ function Index() {
         </div>
         <div className="mt-12 text-center">
           <a
-            href="#proposta"
+            {...anchorProps("proposta")}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
           >
             Quero um projeto como este
@@ -560,7 +560,7 @@ function Index() {
           </div>
           <div className="mt-12 text-center">
             <a
-              href="#proposta"
+              {...anchorProps("proposta")}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
             >
               Quero economia real como esses clientes
@@ -785,7 +785,7 @@ function Index() {
           </div>
           <div className="mt-10 text-center">
             <a
-              href="#proposta"
+              {...anchorProps("proposta")}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-bold text-primary-foreground transition-transform hover:scale-105 glow-volt"
             >
               Quero atender na minha cidade
