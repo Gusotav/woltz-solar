@@ -612,27 +612,39 @@ function Index() {
 
       <section id="depoimentos" className="bg-paper-soft text-ink">
         <div className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-        <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
-          <div>
+          <div className="text-center">
             <p className="text-xs font-bold uppercase text-brand-deep">Quem escolheu a Woltz</p>
             <h2 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">A confiança começa no atendimento</h2>
-            <div className="mt-6 flex gap-1" aria-label="Cinco estrelas">
+            <div className="mt-6 flex justify-center gap-1" aria-label="Avaliações com cinco estrelas">
               {Array.from({ length: 5 }).map((_, index) => <Star key={index} className="h-5 w-5 fill-brand-deep text-brand-deep" />)}
             </div>
           </div>
-          <div className="divide-y divide-paper border-y border-paper">
-            {depoimentos.map((depoimento, index) => (
-              <figure key={depoimento.nome} className="grid gap-5 py-8 sm:grid-cols-[48px_1fr]">
-                <span className="text-3xl font-bold text-brand-deep">0{index + 1}</span>
-                <div>
-                  <blockquote className="text-lg leading-relaxed text-ink">“{depoimento.texto}”</blockquote>
-                  <figcaption className="mt-5 text-sm"><strong>{depoimento.nome}</strong><span className="ml-2 text-ink-muted">{depoimento.local}</span></figcaption>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {depoimentos.map((depoimento) => (
+              <figure
+                key={depoimento.nome}
+                className="flex min-h-[310px] flex-col rounded-md border border-paper bg-paper p-6 shadow-sm transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none"
+              >
+                <figcaption className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-deep text-sm font-bold text-foreground" aria-hidden="true">
+                    {depoimento.nome.split(" ").slice(0, 2).map((parte) => parte[0]).join("")}
+                  </span>
+                  <span className="min-w-0">
+                    <strong className="block truncate text-base text-ink">{depoimento.nome}</strong>
+                    <span className="block text-xs leading-relaxed text-ink-muted">{depoimento.local}</span>
+                  </span>
+                </figcaption>
+                <div className="mt-5 flex gap-1" aria-label="Cinco estrelas">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star key={index} className="h-5 w-5 fill-brand-deep text-brand-deep" />
+                  ))}
                 </div>
+                <blockquote className="mt-5 text-base leading-relaxed text-ink">“{depoimento.texto}”</blockquote>
               </figure>
             ))}
           </div>
-        </div>
-        <div className="mt-10 text-center"><Button asChild size="lg" className="bg-brand-deep text-foreground hover:bg-brand-deep/90"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
+          <div className="mt-10 text-center"><Button asChild size="lg" className="bg-brand-deep text-foreground hover:bg-brand-deep/90"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
         </div>
       </section>
 
