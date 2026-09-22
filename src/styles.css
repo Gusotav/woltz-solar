@@ -50,7 +50,7 @@
   --card-foreground: oklch(0.96 0.01 150);
   --popover: oklch(0.23 0.015 155);
   --popover-foreground: oklch(0.96 0.01 150);
-  --primary: oklch(0.87 0.24 142);
+  --primary: #63f956;
   --primary-foreground: oklch(0.2 0.03 155);
   --secondary: oklch(0.25 0.025 145);
   --secondary-foreground: oklch(0.96 0.01 150);
@@ -62,12 +62,12 @@
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.87 0.24 142);
+  --ring: #63f956;
 
   /* Verde elétrico do logo */
-  --volt: oklch(0.87 0.24 142);
+  --volt: #63f956;
   --volt-foreground: oklch(0.2 0.03 155);
-  --volt-soft: oklch(0.87 0.24 142 / 12%);
+  --volt-soft: color-mix(in oklab, #63f956 12%, transparent);
   /* Verde institucional em tom profundo para contraste AA sobre fundos claros */
   --brand-deep: oklch(0.38 0.13 145);
   --paper: oklch(0.975 0.006 115);
@@ -118,8 +118,8 @@
 
 @utility glow-volt {
   box-shadow:
-    0 0 24px oklch(0.87 0.24 142 / 35%),
-    0 0 64px oklch(0.87 0.24 142 / 15%);
+    0 0 24px color-mix(in oklab, var(--color-primary) 35%, transparent),
+    0 0 64px color-mix(in oklab, var(--color-primary) 15%, transparent);
 }
 
 @utility text-gradient-volt {
