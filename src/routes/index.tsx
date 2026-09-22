@@ -490,7 +490,7 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
         <div className="grid items-end gap-8 lg:grid-cols-2">
           <div>
-            <p className="text-xs font-bold uppercase text-primary">Trabalho de verdade</p>
+            <p className="text-xs font-bold uppercase text-brand-deep">Trabalho de verdade</p>
             <h2 className="mt-4 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">Projetos feitos perto de você</h2>
           </div>
           <p className="max-w-lg text-base leading-relaxed text-ink-muted lg:justify-self-end">
@@ -521,7 +521,7 @@ function Index() {
             </figcaption>
           </figure>
         </div>
-        <div className="mt-10 text-center"><Button asChild size="lg"><a {...anchorProps("proposta")}>Quero um projeto Woltz <ArrowRight /></a></Button></div>
+        <div className="mt-10 text-center"><Button asChild size="lg" className="bg-brand-deep text-foreground hover:bg-brand-deep/90"><a {...anchorProps("proposta")}>Quero um projeto Woltz <ArrowRight /></a></Button></div>
         </div>
       </section>
 
@@ -568,16 +568,16 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <p className="text-xs font-bold uppercase text-primary">Quem escolheu a Woltz</p>
+            <p className="text-xs font-bold uppercase text-brand-deep">Quem escolheu a Woltz</p>
             <h2 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">A confiança começa no atendimento</h2>
             <div className="mt-6 flex gap-1" aria-label="Cinco estrelas">
-              {Array.from({ length: 5 }).map((_, index) => <Star key={index} className="h-5 w-5 fill-primary text-primary" />)}
+              {Array.from({ length: 5 }).map((_, index) => <Star key={index} className="h-5 w-5 fill-brand-deep text-brand-deep" />)}
             </div>
           </div>
           <div className="divide-y divide-paper border-y border-paper">
             {depoimentos.map((depoimento, index) => (
               <figure key={depoimento.nome} className="grid gap-5 py-8 sm:grid-cols-[48px_1fr]">
-                <span className="text-3xl font-bold text-primary">0{index + 1}</span>
+                <span className="text-3xl font-bold text-brand-deep">0{index + 1}</span>
                 <div>
                   <blockquote className="text-lg leading-relaxed text-ink">“{depoimento.texto}”</blockquote>
                   <figcaption className="mt-5 text-sm"><strong>{depoimento.nome}</strong><span className="ml-2 text-ink-muted">{depoimento.local}</span></figcaption>
@@ -586,7 +586,7 @@ function Index() {
             ))}
           </div>
         </div>
-        <div className="mt-10 text-center"><Button asChild size="lg"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
+        <div className="mt-10 text-center"><Button asChild size="lg" className="bg-brand-deep text-foreground hover:bg-brand-deep/90"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
         </div>
       </section>
 
@@ -609,14 +609,14 @@ function Index() {
       <section className="bg-paper text-ink">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <div>
-          <p className="text-xs font-bold uppercase text-primary">Seu próximo passo</p>
+          <p className="text-xs font-bold uppercase text-brand-deep">Seu próximo passo</p>
           <h2 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">Comece a produzir sua própria energia</h2>
           <ul className="mt-8 space-y-4 text-sm text-ink-muted">
             {[
               "Simulação baseada no valor da sua conta",
               "Visita técnica para avaliar o imóvel",
               "Projeto completo e homologado",
-            ].map((item) => <li key={item} className="flex items-center gap-3"><Sparkles className="h-4 w-4 text-primary" />{item}</li>)}
+            ].map((item) => <li key={item} className="flex items-center gap-3"><Sparkles className="h-4 w-4 text-brand-deep" />{item}</li>)}
           </ul>
         </div>
         <div className="border border-border bg-card p-6 shadow-editorial sm:p-8"><LeadForm /></div>
