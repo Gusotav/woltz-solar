@@ -510,7 +510,7 @@ function Index() {
       </section>
 
       <section className="border-y border-border bg-surface-soft">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-3 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-stretch gap-5 px-5 py-16 md:grid-cols-3 lg:px-8">
           {[
             [Sun, "Energia produzida no seu telhado", "Seu imóvel passa a gerar boa parte da energia que consome todos os dias."],
             [ShieldCheck, "Tudo cuidado pela Woltz", "Do dimensionamento à homologação, nossa equipe acompanha o projeto inteiro."],
@@ -518,11 +518,11 @@ function Index() {
           ].map(([Icon, title, text], index) => {
             const FeatureIcon = Icon as typeof Sun;
             return (
-              <article key={String(title)} className="border-l border-border pl-6">
-                <span className="text-xs font-bold text-primary">0{index + 1}</span>
-                <FeatureIcon className="mt-5 h-7 w-7 text-primary" />
-                <h2 className="mt-4 text-xl font-bold">{String(title)}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{String(text)}</p>
+              <article key={String(title)} className="group flex min-h-72 flex-col items-center rounded-md border border-border bg-card/45 px-7 py-8 text-center transition-[background-color,border-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-primary/35 hover:bg-card/70 hover:shadow-editorial motion-reduce:transform-none motion-reduce:transition-none sm:px-9 sm:py-10">
+                <span className="text-xs font-bold text-primary/75">0{index + 1}</span>
+                <FeatureIcon className="mt-6 h-9 w-9 text-primary transition-transform duration-300 ease-out group-hover:scale-110 motion-reduce:transform-none motion-reduce:transition-none" strokeWidth={1.6} />
+                <h2 className="mt-7 text-xl font-bold leading-tight">{String(title)}</h2>
+                <p className="mt-4 max-w-xs text-sm font-normal leading-relaxed text-muted-foreground">{String(text)}</p>
               </article>
             );
           })}
