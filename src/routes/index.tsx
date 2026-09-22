@@ -486,13 +486,14 @@ function Index() {
         </div>
       </section>
 
-      <section id="projetos" className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+      <section id="projetos" className="bg-paper text-ink">
+        <div className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
         <div className="grid items-end gap-8 lg:grid-cols-2">
           <div>
             <p className="text-xs font-bold uppercase text-primary">Trabalho de verdade</p>
             <h2 className="mt-4 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">Projetos feitos perto de você</h2>
           </div>
-          <p className="max-w-lg text-base leading-relaxed text-muted-foreground lg:justify-self-end">
+          <p className="max-w-lg text-base leading-relaxed text-ink-muted lg:justify-self-end">
             Instalações reais da Woltz Solar em residências, comércios e propriedades rurais da região.
           </p>
         </div>
@@ -500,27 +501,28 @@ function Index() {
         <div className="mt-12 grid gap-5 lg:grid-cols-12 lg:grid-rows-2">
           <figure className="group relative min-h-[520px] overflow-hidden lg:col-span-7 lg:row-span-2">
             <img src={paineisAsset.url} alt="Painéis solares pretos instalados pela Woltz Solar" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-7">
+            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-7 text-foreground">
               <p className="text-xs font-bold uppercase text-primary">Residencial</p>
               <h3 className="mt-2 text-2xl font-bold">Energia gerada no próprio telhado</h3>
             </figcaption>
           </figure>
           <figure className="group relative min-h-[250px] overflow-hidden lg:col-span-5">
             <img src={comercialAsset.url} alt="Projeto comercial de energia solar da Woltz Solar" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6">
+            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6 text-foreground">
               <p className="text-xs font-bold uppercase text-primary">Comercial</p>
               <h3 className="mt-1 text-xl font-bold">Mais previsibilidade para o negócio</h3>
             </figcaption>
           </figure>
           <figure className="group relative min-h-[250px] overflow-hidden lg:col-span-5">
             <img src={equipeAsset.url} alt="Veículo da equipe Woltz Solar na região de atendimento" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6">
+            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6 text-foreground">
               <p className="text-xs font-bold uppercase text-primary">Rural</p>
               <h3 className="mt-1 text-xl font-bold">Atendimento onde o cliente está</h3>
             </figcaption>
           </figure>
         </div>
         <div className="mt-10 text-center"><Button asChild size="lg"><a {...anchorProps("proposta")}>Quero um projeto Woltz <ArrowRight /></a></Button></div>
+        </div>
       </section>
 
       <section id="financiamento" className="bg-primary text-primary-foreground">
@@ -562,7 +564,8 @@ function Index() {
         </div>
       </section>
 
-      <section id="depoimentos" className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+      <section id="depoimentos" className="bg-paper-soft text-ink">
+        <div className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
             <p className="text-xs font-bold uppercase text-primary">Quem escolheu a Woltz</p>
@@ -571,19 +574,20 @@ function Index() {
               {Array.from({ length: 5 }).map((_, index) => <Star key={index} className="h-5 w-5 fill-primary text-primary" />)}
             </div>
           </div>
-          <div className="divide-y divide-border border-y border-border">
+          <div className="divide-y divide-paper border-y border-paper">
             {depoimentos.map((depoimento, index) => (
               <figure key={depoimento.nome} className="grid gap-5 py-8 sm:grid-cols-[48px_1fr]">
                 <span className="text-3xl font-bold text-primary">0{index + 1}</span>
                 <div>
-                  <blockquote className="text-lg leading-relaxed text-foreground/90">“{depoimento.texto}”</blockquote>
-                  <figcaption className="mt-5 text-sm"><strong>{depoimento.nome}</strong><span className="ml-2 text-muted-foreground">{depoimento.local}</span></figcaption>
+                  <blockquote className="text-lg leading-relaxed text-ink">“{depoimento.texto}”</blockquote>
+                  <figcaption className="mt-5 text-sm"><strong>{depoimento.nome}</strong><span className="ml-2 text-ink-muted">{depoimento.local}</span></figcaption>
                 </div>
               </figure>
             ))}
           </div>
         </div>
         <div className="mt-10 text-center"><Button asChild size="lg"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
+        </div>
       </section>
 
       <section id="areas" className="relative overflow-hidden border-y border-border bg-surface-soft">
@@ -602,11 +606,12 @@ function Index() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+      <section className="bg-paper text-ink">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <div>
           <p className="text-xs font-bold uppercase text-primary">Seu próximo passo</p>
           <h2 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">Comece a produzir sua própria energia</h2>
-          <ul className="mt-8 space-y-4 text-sm text-muted-foreground">
+          <ul className="mt-8 space-y-4 text-sm text-ink-muted">
             {[
               "Simulação baseada no valor da sua conta",
               "Visita técnica para avaliar o imóvel",
@@ -615,6 +620,7 @@ function Index() {
           </ul>
         </div>
         <div className="border border-border bg-card p-6 shadow-editorial sm:p-8"><LeadForm /></div>
+        </div>
       </section>
 
       <footer className="border-t border-border bg-surface-soft">

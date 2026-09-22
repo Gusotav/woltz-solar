@@ -67,6 +67,11 @@
   --volt: oklch(0.87 0.24 142);
   --volt-foreground: oklch(0.2 0.03 155);
   --volt-soft: oklch(0.87 0.24 142 / 12%);
+  --paper: oklch(0.975 0.006 115);
+  --paper-soft: oklch(0.945 0.012 115);
+  --ink: oklch(0.2 0.022 145);
+  --ink-muted: oklch(0.47 0.022 145);
+  --paper-border: oklch(0.82 0.014 115);
 }
 
 @font-face {
@@ -146,6 +151,26 @@
 
 @utility shadow-editorial {
   box-shadow: 0 24px 70px oklch(0.05 0.01 145 / 45%);
+}
+
+@utility bg-paper {
+  background-color: var(--paper);
+}
+
+@utility bg-paper-soft {
+  background-color: var(--paper-soft);
+}
+
+@utility text-ink {
+  color: var(--ink);
+}
+
+@utility text-ink-muted {
+  color: var(--ink-muted);
+}
+
+@utility border-paper {
+  border-color: var(--paper-border);
 }
 
 @media (max-width: 1023px) {
