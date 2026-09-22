@@ -38,23 +38,23 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  --font-family-display: "Space Grotesk", "Inter", sans-serif;
-  --font-family-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.4rem;
+  --font-family-display: "Brinnan", "Avenir Next", ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: "Brinnan", "Avenir Next", ui-sans-serif, system-ui, sans-serif;
 
   /* Paleta Woltz Solar — carvão + verde elétrico */
-  --background: oklch(0.18 0.01 155);
+  --background: oklch(0.16 0.018 145);
   --foreground: oklch(0.96 0.01 150);
-  --card: oklch(0.23 0.015 155);
+  --card: oklch(0.205 0.02 145);
   --card-foreground: oklch(0.96 0.01 150);
   --popover: oklch(0.23 0.015 155);
   --popover-foreground: oklch(0.96 0.01 150);
   --primary: oklch(0.87 0.24 142);
   --primary-foreground: oklch(0.2 0.03 155);
-  --secondary: oklch(0.28 0.02 155);
+  --secondary: oklch(0.25 0.025 145);
   --secondary-foreground: oklch(0.96 0.01 150);
-  --muted: oklch(0.28 0.02 155);
-  --muted-foreground: oklch(0.7 0.03 150);
+  --muted: oklch(0.26 0.02 145);
+  --muted-foreground: oklch(0.74 0.025 145);
   --accent: oklch(0.3 0.03 150);
   --accent-foreground: oklch(0.92 0.1 145);
   --destructive: oklch(0.6 0.2 25);
@@ -67,6 +67,22 @@
   --volt: oklch(0.87 0.24 142);
   --volt-foreground: oklch(0.2 0.03 155);
   --volt-soft: oklch(0.87 0.24 142 / 12%);
+}
+
+@font-face {
+  font-family: "Brinnan";
+  src: url("/__l5e/assets-v1/467547d9-d57e-40e0-bbfd-aa5d503f5635/brinnan-regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brinnan";
+  src: url("/__l5e/assets-v1/95ee94b5-b927-4637-81f8-97ed1e678833/brinnan-bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
 }
 
 @layer base {
@@ -110,4 +126,30 @@
     linear-gradient(oklch(1 0 0 / 4%) 1px, transparent 1px),
     linear-gradient(90deg, oklch(1 0 0 / 4%) 1px, transparent 1px);
   background-size: 44px 44px;
+}
+
+@utility bg-surface-soft {
+  background-color: oklch(0.19 0.025 145);
+}
+
+@utility bg-hero-shade {
+  background: linear-gradient(90deg, oklch(0.11 0.025 145 / 96%) 0%, oklch(0.11 0.025 145 / 80%) 49%, oklch(0.11 0.025 145 / 55%) 100%);
+}
+
+@utility bg-photo-caption {
+  background: linear-gradient(0deg, oklch(0.1 0.02 145 / 95%), transparent);
+}
+
+@utility bg-area-shade {
+  background: linear-gradient(90deg, var(--color-background), transparent);
+}
+
+@utility shadow-editorial {
+  box-shadow: 0 24px 70px oklch(0.05 0.01 145 / 45%);
+}
+
+@media (max-width: 1023px) {
+  .bg-hero-shade {
+    background: linear-gradient(180deg, oklch(0.11 0.025 145 / 76%) 0%, oklch(0.11 0.025 145 / 94%) 70%, oklch(0.11 0.025 145 / 98%) 100%);
+  }
 }
