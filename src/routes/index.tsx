@@ -281,10 +281,10 @@ function LeadForm({ compact = false }: { compact?: boolean }) {
   }
 
   const inputClass =
-    "w-full rounded-md border border-input bg-background/70 px-3.5 py-3 text-sm outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring/20";
+    "w-full rounded-md border border-input bg-background/70 px-3.5 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-ring/20";
 
   return (
-    <form onSubmit={handleSubmit} className={compact ? "space-y-3" : "space-y-4"}>
+    <form onSubmit={handleSubmit} className={`${compact ? "space-y-3" : "space-y-4"} text-card-foreground`}>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase text-primary">Simulação gratuita</p>
@@ -388,7 +388,7 @@ function LeadForm({ compact = false }: { compact?: boolean }) {
               variant={form.conta === faixa ? "default" : "outline"}
               key={faixa}
               onClick={() => setForm((current) => ({ ...current, conta: faixa }))}
-              className="h-auto min-h-10 whitespace-normal px-2 py-2 text-xs"
+              className={`h-auto min-h-10 whitespace-normal px-2 py-2 text-xs ${form.conta === faixa ? "" : "text-foreground"}`}
             >
               {faixa}
             </Button>
