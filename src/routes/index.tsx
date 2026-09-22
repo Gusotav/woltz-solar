@@ -528,8 +528,9 @@ function Index() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="text-xs font-bold uppercase">Condição especial</p>
-              <p className="mt-5 text-7xl font-bold leading-none sm:text-8xl">0,99%</p>
-              <p className="mt-2 text-lg font-bold">ao mês, a partir de</p>
+              <p className="mt-5 text-lg font-bold">a partir de</p>
+              <p className="mt-1 text-7xl font-bold leading-none sm:text-8xl">0,99%</p>
+              <p className="mt-2 text-lg font-bold">ao mês</p>
             </div>
             <div>
               <h2 className="text-4xl font-bold leading-tight sm:text-5xl">Financie seu sistema de energia solar</h2>
