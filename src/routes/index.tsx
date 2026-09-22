@@ -521,7 +521,7 @@ function Index() {
             </figcaption>
           </figure>
         </div>
-        <div className="mt-10 text-center"><Button asChild size="lg"><a {...anchorProps("proposta")}>Quero um projeto Woltz <ArrowRight /></a></Button></div>
+        <div className="mt-10 text-center"><Button asChild size="lg" className="bg-brand-deep text-foreground hover:bg-brand-deep/90"><a {...anchorProps("proposta")}>Quero um projeto Woltz <ArrowRight /></a></Button></div>
         </div>
       </section>
 
@@ -586,7 +586,7 @@ function Index() {
             ))}
           </div>
         </div>
-        <div className="mt-10 text-center"><Button asChild size="lg"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
+        <div className="mt-10 text-center"><Button asChild size="lg" className="bg-brand-deep text-foreground hover:bg-brand-deep/90"><a {...anchorProps("proposta")}>Quero economia como esses clientes <ArrowRight /></a></Button></div>
         </div>
       </section>
 
