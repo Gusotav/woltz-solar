@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { trackWebEvent } from "@/lib/fbpixel";
 import { trackLeadConversion } from "@/lib/googleAds";
 import { submitLead } from "@/lib/leads.functions";
-import logoAsset from "@/assets/woltz-logo.png.asset.json";
+import logoAsset from "@/assets/woltz-logo-63f956.png.asset.json";
 import comercialAsset from "@/assets/woltz-comercial.jpg.asset.json";
 import equipeAsset from "@/assets/woltz-equipe.jpg.asset.json";
 import paineisAsset from "@/assets/woltz-paineis.jpg.asset.json";
