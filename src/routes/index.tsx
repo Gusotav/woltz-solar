@@ -596,8 +596,8 @@ function Index() {
             ].map(([Icon, title, text]) => {
               const FinanceIcon = Icon as typeof Wallet;
               return (
-                <article key={String(title)} className="border-b border-primary-foreground/25 p-7 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
-                  <FinanceIcon className="h-7 w-7" />
+                <article key={String(title)} className="group border-b border-primary-foreground/25 p-7 transition-[background-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:bg-primary-foreground/10 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+                  <FinanceIcon className="h-7 w-7 transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-110 motion-reduce:transform-none motion-reduce:transition-none" />
                   <h3 className="mt-8 text-xl font-bold">{String(title)}</h3>
                   <p className="mt-2 text-sm text-primary-foreground/70">{String(text)}</p>
                 </article>
