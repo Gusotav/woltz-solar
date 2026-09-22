@@ -501,21 +501,21 @@ function Index() {
         <div className="mt-12 grid gap-5 lg:grid-cols-12 lg:grid-rows-2">
           <figure className="group relative min-h-[520px] overflow-hidden lg:col-span-7 lg:row-span-2">
             <img src={paineisAsset.url} alt="Painéis solares pretos instalados pela Woltz Solar" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-7">
+            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-7 text-foreground">
               <p className="text-xs font-bold uppercase text-primary">Residencial</p>
               <h3 className="mt-2 text-2xl font-bold">Energia gerada no próprio telhado</h3>
             </figcaption>
           </figure>
           <figure className="group relative min-h-[250px] overflow-hidden lg:col-span-5">
             <img src={comercialAsset.url} alt="Projeto comercial de energia solar da Woltz Solar" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6">
+            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6 text-foreground">
               <p className="text-xs font-bold uppercase text-primary">Comercial</p>
               <h3 className="mt-1 text-xl font-bold">Mais previsibilidade para o negócio</h3>
             </figcaption>
           </figure>
           <figure className="group relative min-h-[250px] overflow-hidden lg:col-span-5">
             <img src={equipeAsset.url} alt="Veículo da equipe Woltz Solar na região de atendimento" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6">
+            <figcaption className="absolute inset-x-0 bottom-0 bg-photo-caption p-6 text-foreground">
               <p className="text-xs font-bold uppercase text-primary">Rural</p>
               <h3 className="mt-1 text-xl font-bold">Atendimento onde o cliente está</h3>
             </figcaption>
