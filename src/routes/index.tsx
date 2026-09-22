@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   ArrowDownRight,
@@ -78,6 +78,52 @@ const depoimentos = [
       "Escolhemos a Woltz pela confiança no atendimento. O projeto ficou adequado à rotina da propriedade e tudo foi bem explicado.",
   },
 ];
+
+function AnimatedRate() {
+  const [value, setValue] = useState(0);
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const hasAnimatedRef = useRef(false);
+
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setValue(0.99);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || hasAnimatedRef.current) return;
+        hasAnimatedRef.current = true;
+        const startedAt = performance.now();
+        const duration = 1100;
+
+        const tick = (now: number) => {
+          const progress = Math.max(0, Math.min((now - startedAt) / duration, 1));
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setValue(0.99 * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+        observer.disconnect();
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <span ref={elementRef} className="inline-block min-w-[4.3ch] tabular-nums" aria-label="0,99 por cento">
+      {value.toFixed(2).replace(".", ",")}%
+    </span>
+  );
+}
 
 const TRACKING_KEYS = [
   "utm_source",
@@ -442,7 +488,7 @@ function Index() {
               <span className="h-px w-10 bg-primary" /> Energia solar em Guaíba e região
             </p>
             <h1 className="mt-5 max-w-3xl text-5xl font-bold leading-[0.98] sm:text-6xl lg:text-7xl">
-              Financie o seu kit solar com taxa a partir de <span className="text-primary">0,99%</span>
+              Financie o seu kit solar com taxa a partir de <span className="text-primary"><AnimatedRate /></span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/80 sm:text-lg">
               Projeto, instalação e homologação feitos por uma equipe próxima, que conhece a região e acompanha cada etapa.
@@ -531,7 +577,7 @@ function Index() {
             <div>
               <p className="text-xs font-bold uppercase">Condição especial</p>
               <p className="mt-5 text-lg font-bold">a partir de</p>
-              <p className="mt-1 text-7xl font-bold leading-none sm:text-8xl">0,99%</p>
+              <p className="mt-1 text-7xl font-bold leading-none sm:text-8xl"><AnimatedRate /></p>
               <p className="mt-2 text-lg font-bold">ao mês</p>
             </div>
             <div>
