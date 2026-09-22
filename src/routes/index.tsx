@@ -102,7 +102,7 @@ function AnimatedRate() {
         const duration = 1100;
 
         const tick = (now: number) => {
-          const progress = Math.min((now - startedAt) / duration, 1);
+          const progress = Math.max(0, Math.min((now - startedAt) / duration, 1));
           const eased = 1 - Math.pow(1 - progress, 3);
           setValue(0.99 * eased);
           if (progress < 1) requestAnimationFrame(tick);
@@ -111,7 +111,7 @@ function AnimatedRate() {
         requestAnimationFrame(tick);
         observer.disconnect();
       },
-      { threshold: 0.45 },
+      { threshold: 0.1 },
     );
 
     observer.observe(element);
