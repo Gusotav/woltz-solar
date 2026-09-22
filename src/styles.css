@@ -33,6 +33,7 @@
   --color-volt: var(--volt);
   --color-volt-foreground: var(--volt-foreground);
   --color-volt-soft: var(--volt-soft);
+  --color-brand-deep: var(--brand-deep);
   --font-display: var(--font-family-display);
   --font-sans: var(--font-family-sans);
 }
@@ -67,6 +68,8 @@
   --volt: oklch(0.87 0.24 142);
   --volt-foreground: oklch(0.2 0.03 155);
   --volt-soft: oklch(0.87 0.24 142 / 12%);
+  /* Verde institucional em tom profundo para contraste AA sobre fundos claros */
+  --brand-deep: oklch(0.38 0.13 145);
   --paper: oklch(0.975 0.006 115);
   --paper-soft: oklch(0.945 0.012 115);
   --ink: oklch(0.2 0.022 145);
