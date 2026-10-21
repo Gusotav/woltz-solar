@@ -69,25 +69,35 @@ async function loadStoredMap(): Promise<Record<string, number>> {
   return map;
 }
 
-export async function ensureFields(): Promise<Record<string, number>> {
-  if (cachedMap && Object.keys(KOMMO_FIELDS).every((k) => cachedMap![k])) {
+export async function ensureFields(validate = false): Promise<Record<string, number>> {
+  if (!validate && cachedMap && Object.keys(KOMMO_FIELDS).every((k) => cachedMap![k])) {
     return cachedMap;
   }
 
   const map = await loadStoredMap();
-  const missingKeys = Object.keys(KOMMO_FIELDS).filter((k) => !map[k]);
+  let missingKeys = Object.keys(KOMMO_FIELDS).filter((k) => !map[k]);
 
-  if (missingKeys.length > 0) {
+  if (missingKeys.length > 0 || validate) {
     // Campos já existentes na conta (paginado)
     const existing = new Map<string, number>();
+    const existingIds = new Set<number>();
     for (let page = 1; page <= 10; page++) {
       const res = (await kommoFetch(`/leads/custom_fields?page=${page}&limit=250`)) as {
         _embedded?: { custom_fields?: KommoCustomField[] };
       } | null;
       const fields = res?._embedded?.custom_fields ?? [];
-      for (const f of fields) existing.set(f.name.trim().toLowerCase(), f.id);
+      for (const f of fields) {
+        existing.set(f.name.trim().toLowerCase(), f.id);
+        existingIds.add(f.id);
+      }
       if (fields.length < 250) break;
     }
+
+    // Remove campos que foram excluídos no Kommo
+    for (const key of Object.keys(map)) {
+      if (!existingIds.has(map[key]!)) delete map[key];
+    }
+    missingKeys = Object.keys(KOMMO_FIELDS).filter((k) => !map[k]);
 
     const toCreate: { name: string; type: string }[] = [];
     for (const key of missingKeys) {
@@ -127,7 +137,21 @@ export type KommoLeadPayload = {
 };
 
 export async function createKommoLead(payload: KommoLeadPayload): Promise<number> {
-  const map = await ensureFields();
+  try {
+    return await sendKommoLead(payload, await ensureFields());
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (!message.includes("NotSupportedChoice")) throw err;
+    // Algum campo foi excluído/alterado no Kommo: revalida o mapa e tenta de novo.
+    cachedMap = null;
+    return await sendKommoLead(payload, await ensureFields(true));
+  }
+}
+
+async function sendKommoLead(
+  payload: KommoLeadPayload,
+  map: Record<string, number>,
+): Promise<number> {
 
   const custom_fields_values = Object.entries(payload.values)
     .filter(([key, value]) => Boolean(map[key]) && value != null && value !== "")
