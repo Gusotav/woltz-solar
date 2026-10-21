@@ -1,14 +1,19 @@
 User-agent: Googlebot
 Allow: /
+Disallow: /envio-kommo
 
 User-agent: Bingbot
 Allow: /
+Disallow: /envio-kommo
 
 User-agent: Twitterbot
 Allow: /
+Disallow: /envio-kommo
 
 User-agent: facebookexternalhit
 Allow: /
+Disallow: /envio-kommo
 
 User-agent: *
 Allow: /
+Disallow: /envio-kommo

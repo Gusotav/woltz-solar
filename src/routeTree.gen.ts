@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EnvioKommoRouteImport } from './routes/envio-kommo'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ApiPublicMetaEventRouteImport } from './routes/api/public/meta-event'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnvioKommoRoute = EnvioKommoRouteImport.update({
+  id: '/envio-kommo',
+  path: '/envio-kommo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -31,30 +37,39 @@ const ApiPublicMetaEventRoute = ApiPublicMetaEventRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/envio-kommo': typeof EnvioKommoRoute
   '/privacidade': typeof PrivacidadeRoute
   '/api/public/meta-event': typeof ApiPublicMetaEventRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/envio-kommo': typeof EnvioKommoRoute
   '/privacidade': typeof PrivacidadeRoute
   '/api/public/meta-event': typeof ApiPublicMetaEventRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/envio-kommo': typeof EnvioKommoRoute
   '/privacidade': typeof PrivacidadeRoute
   '/api/public/meta-event': typeof ApiPublicMetaEventRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privacidade' | '/api/public/meta-event'
+  fullPaths: '/' | '/envio-kommo' | '/privacidade' | '/api/public/meta-event'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacidade' | '/api/public/meta-event'
-  id: '__root__' | '/' | '/privacidade' | '/api/public/meta-event'
+  to: '/' | '/envio-kommo' | '/privacidade' | '/api/public/meta-event'
+  id:
+    | '__root__'
+    | '/'
+    | '/envio-kommo'
+    | '/privacidade'
+    | '/api/public/meta-event'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EnvioKommoRoute: typeof EnvioKommoRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   ApiPublicMetaEventRoute: typeof ApiPublicMetaEventRoute
 }
@@ -66,6 +81,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envio-kommo': {
+      id: '/envio-kommo'
+      path: '/envio-kommo'
+      fullPath: '/envio-kommo'
+      preLoaderRoute: typeof EnvioKommoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidade': {
@@ -87,6 +109,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EnvioKommoRoute: EnvioKommoRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   ApiPublicMetaEventRoute: ApiPublicMetaEventRoute,
 }
