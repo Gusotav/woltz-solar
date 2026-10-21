@@ -6,6 +6,9 @@ const BASE_URL = "https://woltzsolar.kommo.com/api/v4";
 export const KOMMO_PIPELINE_ID = 11656355;
 export const KOMMO_STATUS_ID = 89559675;
 
+/** Tags aplicadas a todo lead enviado ao Kommo */
+export const KOMMO_TAGS = ["Site", "Google Ads"];
+
 /** field_key -> nome do campo personalizado no Kommo */
 export const KOMMO_FIELDS: Record<string, string> = {
   telefone: "WhatsApp (site)",
@@ -168,6 +171,9 @@ async function sendKommoLead(
         pipeline_id: KOMMO_PIPELINE_ID,
         status_id: KOMMO_STATUS_ID,
         custom_fields_values,
+        _embedded: {
+          tags: KOMMO_TAGS.map((name) => ({ name })),
+        },
       },
     ]),
   })) as Array<{ id: number }> | null;
