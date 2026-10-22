@@ -1,14 +1,26 @@
-# Welcome to your Lovable project
+# Woltz Solar
+
+Crie uma página de captura para o segmento de energia solar. 
+Nome da empresa: Woltz Solar
+Logo em anexo
+Paleta de cores está no logo em anexo
+
+Pontos importantes
+- Provas sociais
+- Projetos entregues
+- Formulário com perguntas de contato e sobre valor da conta de luz;
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://woltzsolar.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/b7973f4a-e43f-4da9-9709-4c7fed01703f).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +32,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
