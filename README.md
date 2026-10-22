@@ -1,34 +1,5 @@
 # Woltz Solar
 
-Crie uma página de captura para o segmento de energia solar. 
-Nome da empresa: Woltz Solar
-Logo em anexo
-Paleta de cores está no logo em anexo
+Site da Woltz Solar: energia solar residencial, comercial e rural em Guaíba e região, com simulação e financiamento do kit solar.
 
-Pontos importantes
-- Provas sociais
-- Projetos entregues
-- Formulário com perguntas de contato e sobre valor da conta de luz;
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://woltzsolar.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/b7973f4a-e43f-4da9-9709-4c7fed01703f).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+**[Abrir o site →](https://woltzsolar.com)**
